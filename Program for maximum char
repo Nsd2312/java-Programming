@@ -1,0 +1,96 @@
+main.java
+=================================================
+package com.nsdShow.strings;
+
+public class MaxCharacter {
+
+    //write logic to find number format of given number , returns result
+    public char findMaxCharacterCount(String input) {
+        int asciiSize = 256;
+        // Create array to keep the count of individual
+        // characters and initialize the array as 0
+        int count[] = new int[asciiSize];
+
+        // Construct character count array from the input
+        // string.
+        int len = input.length();
+        for (int i=0; i<len; i++)
+            count[input.charAt(i)]++;
+
+        int max = -1;  // Initialize max count
+        char result = ' ';   // Initialize result
+
+        // Traversing through the string and maintaining
+        // the count of each character
+        for (int i = 0; i < len; i++) {
+            if (max < count[input.charAt(i)]) {
+                max = count[input.charAt(i)];
+                result = input.charAt(i);
+            }
+        }
+        return result;
+    }
+}
+
+=====================test files===========================
+1)max_charTest.java
+
+package com.nsdShow.strings;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+public class MaxCharacterTests {
+	private MaxCharacter maxCharacter;
+	@BeforeEach
+	public void setUp() {
+		maxCharacter = new MaxCharacter();
+		
+	}
+	@AfterEach
+	public void tearDown() {
+		maxCharacter=null;
+	}
+	@Test
+	public void givenChar() {
+		assertEquals('a',maxCharacter.findMaxCharacterCount("java"));
+	}
+	@Test
+	public void givenNum() {
+		assertEquals('1',maxCharacter.findMaxCharacterCount("11010234"));
+	}
+	@Test
+	public void givenSpecialChar() {
+		assertEquals('@',maxCharacter.findMaxCharacterCount("#$%@@"));
+	}
+	@Test
+	public void givenBlank() {
+		assertEquals(' ',maxCharacter.findMaxCharacterCount(" "));
+	}
+	@Test
+	public void givenMultiText() {
+		assertEquals('a',maxCharacter.findMaxCharacterCount("java Programming"));
+	}
+	@Test
+	public void givenMultiNumTextSpecialChar() {
+		assertEquals('o',maxCharacter.findMaxCharacterCount("java is too good one!!!"));
+	}
+	@Test
+	public void givenMultiNumTextSpecialCharReturnNum() {
+		assertEquals('0',maxCharacter.findMaxCharacterCount("my num is 900001"));
+	}
+	@Test
+	public void givenMultiNumTextSpecialCharReturnSep() {
+		assertEquals('@',maxCharacter.findMaxCharacterCount("88@@@@@ss"));
+	}
+	@Test
+	public void givenMultiNumReturnNum() {
+		assertEquals('1',maxCharacter.findMaxCharacterCount("7700011111"));
+	}
+	
+
+}
+================================THANK YOU==============================
